@@ -32,6 +32,7 @@ services:
     image: mysql:latest
     volumes:
       - mysql_test:/var/lib/mysql
+
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -117,6 +118,8 @@ services:
 
     volumes:
       - ./api-gateway:/webapp
+      - ./migrations:/migrations
+      #  TODO 5/6 czy dobrze rozwiązuję sprawę migracji - mając już bind mounta, wywołuję docker exec
     depends_on:
       mysql:
         condition: service_healthy
@@ -132,22 +135,22 @@ services:
 
   # TODO Nie warto dokeryzować frontendu - zarchiwizować wiedzę i usunąć stąd
 #    https://www.youtube.com/watch?v=QePBbG5MoKk
-  frontend:
-    build:
-      context:  ./frontend
-    command: npm start
-
-    depends_on:
-      mysql:
-        condition: service_healthy
-      mysql_test:
-        condition: service_healthy
-    ports:
-      - "3000:3000"
-    stdin_open: true
-    tty: true
-    networks:
-      flota-network:
+#  frontend:
+#    build:
+#      context:  ./frontend
+#    command: npm start
+#
+#    depends_on:
+#      mysql:
+#        condition: service_healthy
+#      mysql_test:
+#        condition: service_healthy
+#    ports:
+#      - "3000:3000"
+#    stdin_open: true
+#    tty: true
+#    networks:
+#      flota-network:
   # TODO Migracje powinny być robione przez developera poprzez docker exec
 #  alembic:
 #    build:

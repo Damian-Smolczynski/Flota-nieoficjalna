@@ -1,0 +1,38 @@
+----------------------------------------
+Zastosowanie pliku
+----------------------------------------
+W tym pliku będę zapisywał kolejne kroki programistyczne jakie poczyniłem w aplikacji.
+To nad jakimi taskami pracuję będzie wynikało w 90% z pliku User Stories
+i w 10% z Problem Biznesowy
+
+
+----------------------------------------
+KROKI
+----------------------------------------
+1. Tworzę serwis oparty o Flaska, bazę MySQL i modele w konwencji Active Record
+2. Utworzyłem model Car, 2 Resources - jeden ma tylko metodę get, która zwraca wszystkie samochody, 
+drugi ma metody get, post, patch, delete, które pozwalają na znajdowanie, tworzenie, updatowanie i usuwanie
+samochodu na podstawie id samochodu.
+3. Dodałem migrację alembic, która tworzy mi tabelę cars
+4. Użyłem migracji z większym modelem danych
+5. Zmieniłem pola w modelu Car, dodałem modele FuelTypeModel i VehicleStatusModel
+6. Zmieniłem parser w CarsResource, aby pasował do modelu
+7. Wprowadziłem obsługę wyjątków dla metody post w CarsResource
+8. Stworzyłem komponent do obsługi zapytań do RESTa
+9. Wydzieliłem mikroserwisy
+10. Stworzyłem api-gateway i skonfigurowałem mu nginxa na port 80
+11. Ustawiłem domyślną rolę przy tworzeniu użytkownika na 'USER'
+12. Po skonfigurowaniu nginxa na api-gateway, autentykacja działa ok
+
+
+
+
+
+----------------------------------------
+PYTANIA
+----------------------------------------
+1. Jak rozwiązać tworzenie aplikacji - mam 3 koncepcje, która jest najlepsza?:
+- robię jedną aplikację
+- robię osobne serwisy do poszczególnych grup funkcjonalności - jak to rozdzielać 
+w docker-compose(mój pomysł to tworzenie folderów app1, app2... i Dockerfile1, Dockerfile2...)'
+- osobne repozytoria i osobno zrobiony kontener na dane

@@ -1,16 +1,20 @@
+import logging
+
 from flask import request, Response
 from flask_restful import Resource, reqparse
 from datetime import datetime
 from app.db.model import UserModel
 from app.email.configuration import MailSender
 
+logging.basicConfig(level=logging.DEBUG)
 
 class UserResource(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('username', type=str, required=True, help='Username cannot be empty')
     parser.add_argument('password', type=str, required=True, help='Password cannot be empty')
     parser.add_argument('email', type=str, required=True, help='Email cannot be empty')
-    parser.add_argument('role', type=str, required=True, help='Role cannot be empty')
+    # parser.add_argument('role', type=str, required=True, help='Role cannot be empty')
+    # TODO 2 przetestować, czy rola ustawi się na USERA
 
     def post(self) -> Response:
         try:
@@ -25,10 +29,12 @@ class UserResource(Resource):
             user = UserModel(**request_data)
             user.save_or_update()
 
+            # TODO 3 w tym miejscu dobrze będzie wprowadzić bazę na linki aktywacyjne
             MailSender.send_activation_email(user.id, user.username, user.email)
 
             return {'message': 'User created'}, 201
         except Exception as e:
+            logging.debug(e.args)
             return {'message': "Service that application relies on didn't respond"}, 503
 
 
@@ -36,12 +42,17 @@ class UserActivationResource(Resource):
 
     def get(self) -> Response:
         try:
-
+            # TODO 4 W tym miejscu mogę wprowadzić mechanizm używania bazy do autentykacji użytkownika
             # Checks if activation timestamp is not expired
             timestamp = float(request.args.get('timestamp'))
             timestamp_now = datetime.utcnow().timestamp() * 1000
             if timestamp < timestamp_now:
-                return Response({'message': f'Activation link has been expired'}, 400)
+                user_id = request.args.get('id')
+                user_to_activate = UserModel.find_by_id(user_id)
+                if user_to_activate:
+                    MailSender.send_activation_email(user_to_activate.id, user_to_activate.username, user_to_activate.email)
+                    return {'message': 'Activation link is expired. New one was sent to your email'}, 201
+                return Response({'message': 'User activation error'}, 400)
 
             # Timestamp is valid so .active is updated
             user_id = request.args.get('id')

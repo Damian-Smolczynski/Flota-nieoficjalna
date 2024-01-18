@@ -39,10 +39,10 @@ class UserModel(sa.Model):
     username = sa.Column(sa.String(255))
     password = sa.Column(sa.String(255))
     email = sa.Column(sa.String(255))
-    role = sa.Column(sa.String(10))
+    role = sa.Column(sa.String(10), default="USER")
     active = sa.Column(sa.Boolean, default=False)
 
-    def __init__(self, username: str, password: str, email: str, role: str):
+    def __init__(self, username: str, password: str, email: str, role: str = "USER"):
         self.username = username
         self.password = generate_password_hash(password)
         self.email = email

@@ -66,6 +66,8 @@ def configure_security(app):
         }
 
         response = make_response(response_body, 201)
+        response.set_cookie(key='access_token', value=access_token, httponly=True, secure=True)
+        response.set_cookie(key='refresh_token', value=refresh_token, httponly=True, secure=True)
 
         return response
 
@@ -77,7 +79,7 @@ def configure_security(app):
 
         request_data = request.get_json()
         refresh_token = request_data.get('refresh_token', '')
-
+        # refresh_token = request.cookies['refresh_token']
 
         try:
             decoded_refresh_token = jwt.decode(refresh_token, JWT_SECRET, algorithms=[JWT_AUTHTYPE])
@@ -107,9 +109,10 @@ def configure_security(app):
             }
 
             response = make_response(response_body, 201)
-
-
+            response.set_cookie('access_token', access_token)
+            response.set_cookie('refresh_token', refresh_token)
             return response
+
         except Exception:
             return {"message": "Signature has expired"}, 403,  {'Content-Type': 'application/json'}
 
@@ -155,3 +158,16 @@ def token_required(roles: list[str]):
         return decorated
 
     return decorator
+
+"""
+Flow security jest następujące:
+- gdy wejdziemy w /login, to sprawdzane jest czy [użytkownik istnieje, jest aktywny, czy hasło się zgadza],
+jeżeli warunki są spełnione to zwracane są access i refresh tokeny w body, oraz w cookies
+
+-gdy wejdziemy w /refresh, to dekodujemy refresh token, jeżeli jego 'exp' jest w przeszłości to rzucany jest wyjątek
+jeżeli nie ma wyjątku, to tworzony jest nowy acces token, a refresh token dostaje ten sam 'exp', więc jak go przekroczy
+to trzeba będzie się zalogować
+
+
+"""
+# TODO 1 W której warstwie przekierowuję do /login, jeżeli acces token i refresh token wygasną

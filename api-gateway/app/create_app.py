@@ -1,16 +1,16 @@
 from flask import Flask
 from flask_restful import Api
 
-from app.cors.configuration import CORS_CONFIG
+from app.cors.configuration import CORS_CONFIG # jedyne wejscie to localhost:3000
 from app.db.configuration import sa
 from app.env_variables import SQLALCHEMY_DATABASE_URI
 from app.route.user import UserResource, UserActivationResource
 from flask_cors import CORS
 
-from app.security.configuration import configure_security
+from app.security.configuration import configure_security # dodanie routes /login i /refresh
 from app.email.configuration import MAIL_SETTINGS, MailSender
 
-from app.route.car import cars_blueprint
+from app.route.car import cars_blueprint # routsy wykonują mechanizmy komunikowania się z osobnymi mikroserwisami
 
 app = Flask(__name__)
 
@@ -31,7 +31,7 @@ def main():
         # EMAIL CONFIGURATION
         # ----------------------------------------------------------------------
         app.config.update(MAIL_SETTINGS)
-        MailSender.init(app)
+        MailSender.init(app) # MailSender tworzy sobie intancję mail -> Mail(app)
 
         # ----------------------------------------------------------------------
         # SECURITY CONFIGURATION

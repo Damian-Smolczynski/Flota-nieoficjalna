@@ -6,7 +6,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 ENV_FILENAME = '.env'
-ENV_PATH = Path.cwd().absolute().joinpath(f'{ENV_FILENAME}')
+ENV_PATH = Path.cwd().absolute().joinpath(f'{ENV_FILENAME}') # webapp/.env
 load_dotenv(ENV_PATH)
 
 """

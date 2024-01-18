@@ -22,7 +22,6 @@ class MailSender:
     @classmethod
     def init(cls, app):
         cls.mail = Mail(app)
-        logger.info(cls.mail)
 
     @classmethod
     def send_activation_email(cls, user_id: int, username: str, email: str) -> None:

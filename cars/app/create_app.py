@@ -4,7 +4,7 @@ from flask_restful import Api
 from app.cors.configuration import CORS_CONFIG
 from app.db.configuration import sa
 from app.env_variables import SQLALCHEMY_DATABASE_URI
-from app.route.car import AllCarsResource, CarResource
+from app.route.car import AllCarsResource, CarResource, CarResourceAdd
 from flask_cors import CORS
 
 
@@ -22,6 +22,7 @@ def main():
         api = Api(app)
         api.add_resource(AllCarsResource, '/cars/all')
         api.add_resource(CarResource, '/car/<int:car_id>')
+        api.add_resource(CarResourceAdd, '/car')
 
         # ----------------------------------------------------------------------
         # CORS CONFIGURATION

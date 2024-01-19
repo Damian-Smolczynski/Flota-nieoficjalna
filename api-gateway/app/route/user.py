@@ -46,9 +46,14 @@ class UserActivationResource(Resource):
             # Checks if activation timestamp is not expired
             timestamp = float(request.args.get('timestamp'))
             timestamp_now = datetime.utcnow().timestamp() * 1000
+            user_id = request.args.get('id')
+            user_to_activate = UserModel.find_by_id(user_id)
+
+            if user_to_activate.is_activated():
+                return {'message': 'User already activated'}, 400
+
             if timestamp < timestamp_now:
-                user_id = request.args.get('id')
-                user_to_activate = UserModel.find_by_id(user_id)
+
                 if user_to_activate:
                     MailSender.send_activation_email(user_to_activate.id, user_to_activate.username, user_to_activate.email)
                     return {'message': 'Activation link is expired. New one was sent to your email'}, 201

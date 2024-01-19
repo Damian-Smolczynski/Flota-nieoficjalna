@@ -76,6 +76,9 @@ class UserModel(sa.Model):
             'active': self.active
         }
 
+    def is_activated(self) -> bool:
+        return self.active
+
     @classmethod
     def find_by_username(cls, username: str) -> Self | None:
         """

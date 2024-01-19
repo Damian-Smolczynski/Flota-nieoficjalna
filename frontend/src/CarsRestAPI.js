@@ -27,7 +27,7 @@ const useCarRestApi = () => {
 
 
     // tworzę zmienną, która przechowuje bazowy url
-    const BASE_URL = 'http://localhost:8001/car'
+    const BASE_URL = 'http://localhost:8001/car' //TODO Tutaj jest błąd, bo cors nie jest ustawiony na 3000 w cars-service
 
     // --------------------------------------------------
     // SEKCJA METOD DO ZARZĄDZANIA REQUESTAMI

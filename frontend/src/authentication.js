@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-
+// TODO X Zapytać Krzyśka o obsługę tokenów lub stworzyć jakieś rozwiązanie
 export const setAuthToken = token => {
     if (token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

@@ -25,7 +25,7 @@ class MailSender:
 
     @classmethod
     def send_activation_email(cls, user_id: int, username: str, email: str) -> None:
-        timestamp = datetime.utcnow().timestamp() * 1000 + 120000
+        timestamp = datetime.utcnow().timestamp() * 1000 + 30000
 
         html_body = f'''
             <html>

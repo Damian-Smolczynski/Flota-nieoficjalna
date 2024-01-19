@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import CarsRestAPI from "./CarsRestAPI";
 import LoginForm from "./LoginForm";
 import Register from "./Register";
-import WidokPojazdow from "./stylesheets/WidokPojazdow";
+import WidokPojazdow from "./components/WidokPojazdow";
 
 
 

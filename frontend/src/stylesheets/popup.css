@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+
+.popup
+{
+    position: fixed;
+    top: -150%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: inset 0px 0px 20px 5px rgba(255,255,255,0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    width: 450px;
+    padding: 20px 30px;
+    border-radius: 10px;
+    z-index: 1000;
+    transition: top 0ms ease-in-out 300ms,
+    opacity 300ms ease-in-out 0ms,
+    transform 300ms ease-in-out 0ms;
+    min-height: 70vh;
+}
+
+@media only screen and (max-width: 500px) {
+    .popup
+    {
+        min-width: 350px;
+    }
+}
+@media only screen and (min-width: 500px) {
+    .popup
+    {
+        min-width: 380px;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .popup
+    {
+        min-width: 850px;
+    }
+}
+@media only screen and (min-width: 1500px) {
+    .popup
+    {
+        min-width: 1300px;
+    }
+}
+
+.popup.active {
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    transition: top 0ms ease-in-out 0ms,
+                opacity 300ms ease-in-out 0ms,
+                transform 300ms ease-in-out 0ms;
+}
+
+.popup .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    width: 25px;
+    height: 25px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 25px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.popup .close-btn:hover {
+    background: rgba(255,0,0,0.6);
+    cursor: pointer;
+}
+
+.popup h1 {
+    font-size: 35px;
+    text-align: center;
+    margin: 10px 0 20px;
+    color: white;
+}
+
+.popup p {
+    font-size: 18px;
+    color: white;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+button#open-popup {
+    background: transparent;
+    outline: none;
+    border: 2px solid #fdfdfd;
+    font-size: 10px;
+    color: #fdfdfd;
+    padding: 10px 20px;
+    cursor: pointer;
+
+}
+
+/*https://www.youtube.com/watch?v=DfkW49iZdGw*/

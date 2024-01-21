@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import axios from "axios";
 
 import {Navigate, NavLink} from "react-router-dom";
-import {setAuthToken} from "./authentication";
+import {setAuthToken} from "../../authentication";
 import {InputDiv} from "./Register";
 
 

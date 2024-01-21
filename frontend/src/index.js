@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Popup from "./components/Popup";
-import WidokPojazdow from "./components/WidokPojazdow";
+import CarsView from "./components/CarsView";
 
 
 
@@ -11,8 +10,7 @@ root.render(
       {/*<BrowserRouter>*/}
       {/*    <App/>*/}
       {/*</BrowserRouter>*/}
-      {/*<Popup/>*/}
-      <WidokPojazdow/>
+      <CarsView/>
 
   </React.StrictMode>
 );

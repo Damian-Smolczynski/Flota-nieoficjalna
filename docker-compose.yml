@@ -66,7 +66,7 @@ services:
       - api-gateway
 
   # ===================================================================================
-  # TODO Można robić kilka nginxów, potrzebuję tylko konfiguracji
+  # NOTE Można robić kilka nginxów, potrzebuję tylko konfiguracji
   # ===================================================================================
 #  nginx-cars-service:
 #    image: nginx:latest
@@ -88,7 +88,7 @@ services:
       context: ./cars
       dockerfile: Dockerfile
 
-#    TODO Poprawną formą tworzenia kontenera jest ustawianie bind mounta na folder serwisu i kopiowanie po staremu
+#    NOTE Poprawną formą tworzenia kontenera jest ustawianie bind mounta na folder serwisu i kopiowanie po staremu
     command: gunicorn --bind 0.0.0.0:8001 --workers 6 'app.create_app:main()' --reload
 
     volumes:
@@ -119,7 +119,7 @@ services:
     volumes:
       - ./api-gateway:/webapp
       - ./migrations:/migrations
-      #  TODO 5/6 czy dobrze rozwiązuję sprawę migracji - mając już bind mounta, wywołuję docker exec
+      #  NOTE tworzenie migracji - mając już bind mounta, wywołuję docker exec
     depends_on:
       mysql:
         condition: service_healthy
@@ -133,7 +133,7 @@ services:
           - api-gateway-service
 
 
-  # TODO Nie warto dokeryzować frontendu - zarchiwizować wiedzę i usunąć stąd
+  # NOTE Nie warto dokeryzować frontendu - zarchiwizować wiedzę i usunąć stąd
 #    https://www.youtube.com/watch?v=QePBbG5MoKk
 #  frontend:
 #    build:
@@ -151,7 +151,7 @@ services:
 #    tty: true
 #    networks:
 #      flota-network:
-  # TODO Migracje powinny być robione przez developera poprzez docker exec
+  # NOTE Migracje powinny być robione przez developera poprzez docker exec
 #  alembic:
 #    build:
 #      context: ./migrations

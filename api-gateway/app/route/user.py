@@ -13,8 +13,6 @@ class UserResource(Resource):
     parser.add_argument('username', type=str, required=True, help='Username cannot be empty')
     parser.add_argument('password', type=str, required=True, help='Password cannot be empty')
     parser.add_argument('email', type=str, required=True, help='Email cannot be empty')
-    # parser.add_argument('role', type=str, required=True, help='Role cannot be empty')
-    # TODO 2 przetestować, czy rola ustawi się na USERA
 
     def post(self) -> Response:
         try:
@@ -59,7 +57,6 @@ class UserActivationResource(Resource):
                     return {'message': 'Activation link is expired. New one was sent to your email'}, 201
                 return Response({'message': 'User activation error'}, 400)
 
-            # Timestamp is valid so .active is updated
             user_id = request.args.get('id')
             user_to_activate = UserModel.find_by_id(user_id)
             if user_to_activate:

@@ -170,4 +170,4 @@ to trzeba będzie się zalogować
 
 
 """
-# TODO 1 W której warstwie przekierowuję do /login, jeżeli acces token i refresh token wygasną
+# TODO 1 W jaki sposób zorganizować sobie mechanizm używania tokenów przez frontend

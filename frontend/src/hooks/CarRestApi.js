@@ -15,10 +15,10 @@ const useCarsRestApi = () => {
         setChange(false)
     }, [change]);
 
-    const BASE_URL = 'http://localhost:8001/car'
+    const BASE_URL = 'http://localhost/cars'
 
     const getAll = async () => {
-        const response = await axios.get(`http://localhost:8000/cars/all`)
+        const response = await axios.get(`${BASE_URL}/all`)
         setCars(await response.data['all_cars'])
     }
 
@@ -73,10 +73,10 @@ const useCarsRestApi = () => {
         addErrorIfExist(!isString(car.make), 'Invalid car make')
         addErrorIfExist(!isString(car.model), 'Invalid car model')
         addErrorIfExist(!matchesRegex(car.first_registration_date, /^\d{4}-\d{2}-\d{2}$/), 'Invalid first registration date format')
-        addErrorIfExist(!isInteger(car.production_year), 'Production year must be an integer')
-        addErrorIfExist(!isInteger(car.mileage) || !inRange(car.mileage, 0, 6000000), 'Mileage has to be integer between 0 and 6 000 000')
-        addErrorIfExist(!isInteger(car.fuel_type_id) || !inRange(car.fuel_type_id, 0, Infinity), 'Fuel type id has to be integer between 0 and Infinity')
-        addErrorIfExist(!isInteger(car.vehicle_status_id) || !inRange(car.vehicle_status_id, 0, Infinity), 'Mileage has to be integer between 0 and Infinity')
+        addErrorIfExist(!isInteger(Number(car.production_year)), 'Production year must be an integer')
+        addErrorIfExist(!isInteger(Number(car.mileage)) || !inRange(Number(car.mileage), 0, 6000000), 'Mileage has to be integer between 0 and 6 000 000')
+        addErrorIfExist(!isInteger(Number(car.fuel_type_id)) || !inRange(car.fuel_type_id, 0, Infinity), 'Fuel type id has to be integer between 0 and Infinity')
+        addErrorIfExist(!isInteger(Number(car.vehicle_status_id)) || !inRange(car.vehicle_status_id, 0, Infinity), 'Mileage has to be integer between 0 and Infinity')
 
         return errors
     }
@@ -87,7 +87,7 @@ const useCarsRestApi = () => {
             return errors.join(' ')
         }
 
-        const response = await axios.post(`${BASE_URL}/0`, car);
+        const response = await axios.post(`${BASE_URL}/`, car);
         setChange(true)
         return await response.data
     }

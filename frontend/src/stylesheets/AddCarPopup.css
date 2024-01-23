@@ -20,7 +20,8 @@
     transition: top 0ms ease-in-out 300ms,
     opacity 300ms ease-in-out 0ms,
     transform 300ms ease-in-out 0ms;
-    min-height: 70vh;
+    min-height: 60vh;
+    font-size: 15px;
 }
 
 @media only screen and (max-width: 500px) {
@@ -79,7 +80,6 @@
 .popup h1 {
     font-size: 35px;
     text-align: center;
-    margin: 10px 0 20px;
     color: white;
 }
 
@@ -103,6 +103,49 @@ button#open-popup {
     padding: 10px 20px;
     cursor: pointer;
 
+}
+
+.popup p.formInputHeader
+{
+
+}
+
+.popup p.formErrMsg
+{
+    color: #ff0000;
+    border-radius: 10px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.addCarInput
+{
+    outline: none;
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px;
+    border: none;
+}
+
+.popup button
+{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.form-group{
+  padding:10px;
+  border:2px solid;
+  margin:10px;
+}
+.form-group>label{
+  position:absolute;
+  top:-1px;
+  left:20px;
+  background-color:white;
+}
+
+.form-group>input{
+  border:none;
 }
 
 /*https://www.youtube.com/watch?v=DfkW49iZdGw*/

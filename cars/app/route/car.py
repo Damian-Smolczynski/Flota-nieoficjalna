@@ -8,6 +8,7 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
+# TODO Wprowadzić walidację
 
 class AllCarsResource(Resource):
     def get(self) -> Response:
@@ -29,8 +30,8 @@ class CarResource(Resource):
         car_to_delete = CarModel.get_by_id(car_id)
         if car_to_delete:
             car_to_delete.delete()
-            return {"message": "Car has been deleted"}
-        return {"message": "Car not found"}
+            return {"message": "Car has been deleted"}, 200
+        return {"message": "Car not found"}, 404
 
     def patch(self, car_id):
         data = request.get_json()

@@ -81,7 +81,7 @@ const AddCarPopup = ({add}) => {
                         <option value="2">Diesel</option>
                         <option value="3">Electric</option>
                     </select>
-                    {errors.production_year && <p className={"formErrMsg"}>{errors.production_year.message}</p>}
+                    {errors.fuel_type_id && <p className={"formErrMsg"}>{errors.fuel_type_id.message}</p>}
 
                     <p className={"formInputHeader"}>Vehicle status:</p>
                     <select {...register("vehicle_status_id", {required: true})}>
@@ -89,7 +89,7 @@ const AddCarPopup = ({add}) => {
                         <option value="2">Waiting for repairs to be done</option>
                         <option value="3">Waiting for mot or insurance</option>
                     </select>
-                    {errors.production_year && <p className={"formErrMsg"}>{errors.production_year.message}</p>}
+                    {errors.vehicle_status_id && <p className={"formErrMsg"}>{errors.vehicle_status_id.message}</p>}
                     <div className={"buttons"}>
                         <button type={"submit"}>Create</button>
                     </div>

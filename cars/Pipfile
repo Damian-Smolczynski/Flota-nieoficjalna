@@ -13,6 +13,9 @@ mysqlclient = "*"
 alembic = "*"
 sqlalchemy = "*"
 flask-cors = "*"
+schemadict = "*"
+pytest = "*"
+coverage = {extras = ["toml"], version = "*"}
 
 [dev-packages]
 

@@ -63,15 +63,6 @@ def client(app) -> FlaskClient:
 
 
 @pytest.fixture()
-def runner(app) -> FlaskCliRunner:
-    """
-    :param app: An instance of Flask application.
-    :return: A FlaskCliRunner instance that can be used to run CLI commands on the Flask application.
-    """
-    runner: FlaskCliRunner = app.test_cli_runner()
-    return runner
-
-@pytest.fixture()
 def sqlalchemy_database_uri():
     """
     Returns the SQLAlchemy database URI.

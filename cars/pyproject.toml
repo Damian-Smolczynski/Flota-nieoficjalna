@@ -1,2 +1,2 @@
 [tool.coverage.html]
-directory = "tests/coverage"   # Specifies the directory where reports are created
+directory = "coverage_report"

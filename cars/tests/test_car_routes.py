@@ -66,6 +66,16 @@ def test_get_one_by_id(client, car_data, desired_response_data):
     assert res.json == desired_response_data
     assert res.status_code == 200
 
+def test_get_one_by_id_that_not_exist(client):
+    """
+    Test method to check if getting a car by id that does not exist returns a 404 status code and a proper error message.
+
+    :param client: The HTTP client to use for sending requests.
+    :return: None
+    """
+    res = client.get('/car/1')
+    assert res.status_code == 404
+    assert res.json == {"message": "Car does not exist"}
 
 def test_delete_car_by_id(client, car_data):
     """
@@ -129,3 +139,31 @@ def test_update_car_by_id(client, car_data, desired_response_data):
     response = client.patch("/car/1", json={"registration": "XXXXXXX"})
     assert response.status_code == 200
     assert response.json == {**desired_response_data, 'registration': 'XXXXXXX'}
+
+def test_update_car_by_id_with_bad_data(client, car_data, desired_response_data):
+    """
+    Test the update_car_by_id_with_bad_data method.
+
+    :param client: The client used to send the request.
+    :param"""
+    client.post('/car/1', json=car_data)
+    response = client.patch("/car/1", json={**car_data, 'registration': 'DDD0000 0'}) # regex won't match
+    assert response.status_code == 400
+    assert response.json == {"message": "Invalid request"}
+
+
+def test_update_car_by_id_when_not_exists(client, car_data):
+    """
+
+    :param client: The client used to send the HTTP request.
+    :type client: object
+
+    :param car_data: The data of the car to be updated.
+    :type car_data: dict
+
+    :return: None
+
+    """
+    response = client.patch("/car/1", json=car_data)
+    assert response.status_code == 404
+    assert response.json == {"message": "Car does not exist"}
